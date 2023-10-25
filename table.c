@@ -21,6 +21,8 @@ void freeTable(Table* table) {
 
 static Entry* findEntry(Entry* entries, int capacity, ObjString* key) {
   uint32_t index = key->hash % capacity;
+  Entry* tombstone = NULL;
+
   for (;;) {
     Entry* entry = &entries[index];
     if (entry->key == NULL) {
@@ -36,7 +38,6 @@ static Entry* findEntry(Entry* entries, int capacity, ObjString* key) {
       return entry;
     }
     index = (index + 1) % capacity;
-    Entry* tombstone = NULL;
   }
 }
 
