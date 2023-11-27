@@ -10,7 +10,7 @@
 
 // represents a single ongoing function call. Each time a function is called one of these structs is created.
 typedef struct {
-  ObjFunction* function; // the function being called
+  ObjClosure* closure;
   uint8_t* ip;
   Value* slots; // points into the VMs value stack at the first slot this function can use
 } CallFrame;
