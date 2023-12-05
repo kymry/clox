@@ -1,13 +1,8 @@
-//> Chunks of Bytecode chunk-c
 #include <stdlib.h>
 
 #include "chunk.h"
-//> chunk-c-include-memory
 #include "memory.h"
-//< chunk-c-include-memory
-//> Garbage Collection chunk-include-vm
 #include "vm.h"
-//< Garbage Collection chunk-include-vm
 
 void initChunk(Chunk* chunk) {
   chunk->count = 0;
@@ -56,16 +51,10 @@ void writeChunk(Chunk* chunk, uint8_t byte, int line) {
 //< chunk-write-line
   chunk->count++;
 }
-//< write-chunk
-//> add-constant
+
 int addConstant(Chunk* chunk, Value value) {
-//> Garbage Collection add-constant-push
   push(value);
-//< Garbage Collection add-constant-push
   writeValueArray(&chunk->constants, value);
-//> Garbage Collection add-constant-pop
   pop();
-//< Garbage Collection add-constant-pop
   return chunk->constants.count - 1;
 }
-//< add-constant
